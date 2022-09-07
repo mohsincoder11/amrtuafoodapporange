@@ -1,0 +1,7 @@
+{
+  "name": "Fresh Chicken",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

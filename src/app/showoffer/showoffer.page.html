@@ -1,0 +1,32 @@
+
+<ion-content class="main_container">
+  <ion-row>
+    <ion-col size="11">
+    </ion-col>
+    <ion-col size="1">
+      <span class="cross_icon" (click)="dismiss()"><ion-icon name="close-outline"></ion-icon></span>
+
+    </ion-col>
+
+  </ion-row>
+  <ion-row class="card_row">
+    <ion-card *ngFor="let c of coupon_data;">
+      <ion-card-header>
+        <ion-card-subtitle>
+          <span style="width:85%;display: inline-block;">
+          {{c.coupon_code}}
+          </span>
+          <span *ngIf="Item_value>=c.min_amount" style="color:var(--ion-color-danger);width:15%; text-align: right;" (click)="apply_coupon(c.id)"><b>Apply</b></span>
+          <span *ngIf="Item_value<c.min_amount" style="color:var(--ion-color-medium);width:15%; text-align: right;" >Apply</span>
+        </ion-card-subtitle>
+        <ion-card-title>{{c.title}}</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        {{c.discount_percent}}% wallet cashback on minimum order of &#8377; {{c.min_amount}} and maximum wallet cashback will be &#8377; {{c.max_discount}}.
+
+      </ion-card-content>
+    </ion-card>
+  </ion-row>
+
+</ion-content>

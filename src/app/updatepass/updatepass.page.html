@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="color:#fff; padding-left: 5%">Mobile Verification</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="tertiary">
+  <div class="header_title">
+    <p>
+      To change your password, we will send you an OTP on your registered mobile
+      number to verify.
+    </p>
+  </div>
+
+  <!-- <div style="padding-left: 5%; padding-right: 5%">
+      <form #form="ngForm">
+        <div
+          class="wrap-input100 validate-input m-b-20"
+          data-validate="Enter registered mobile number"
+        >
+          <input
+            class="input100"
+            [(ngModel)]="mobileNo"
+            name="mob"
+            (keyup)="checkMob($event)"
+            type="number"
+            required=true
+          />
+          <span
+            class="focus-input100"
+            data-placeholder="Enter your mobile number"
+          ></span>
+        </div>
+
+        <div class="container-login100-form-btn">
+          <button
+            [disabled]="!btnView"
+            (click)="otpPage(form)"
+            class="login100-form-btn"
+          >
+            Continue
+          </button>
+        </div>
+      </form>
+    </div> -->
+
+
+  <div style="z-index: 10000; margin-top: -10%;" class="bg-white rounded-tl-3xl rounded-tr-3xl p-4">
+    <form #form="ngForm" style="padding:0 1rem;">
+      <ion-item>
+        <ion-label position="floating">Mobile Number</ion-label>
+        <ion-input [(ngModel)]="mobileNo" name="mob" (keyup)="checkMob($event)" type="number" required=true></ion-input>
+
+      </ion-item>
+      <ion-text class="error_msg" color="danger" *ngIf="mobile_no"> Enter valid 10 digits number.</ion-text>
+      <ion-text class="error_msg" color="danger" *ngIf="mobile_no_not_register"> This mobile number is not registered
+        with us.</ion-text>
+
+      <div class="mt-2" style="margin-top:1rem;">
+        <button [disabled]="!btnView" (click)="otpPage(form)" class="btn-grad">
+          Continue
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div id="snackbar"> <span id="snackbar_error"></span></div>
+  <div *ngIf="loader_visible" class="lds-ripple">
+    <div></div>
+    <div></div>
+  </div>
+
+</ion-content>

@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button (click)="goToHome()"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="color:#fff; padding-left: 5%">Order Success</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="activatedRoute.snapshot.params.amount != undefined" color="tertiary">
+  <div align="center" style="margin-top: 25%">
+    <ion-col size="12">
+      <div class="image_container">
+        <div class="success-animation">
+          <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+          </svg>
+        </div>
+      </div>
+    </ion-col>
+    <div>
+      <p align="center" style="margin-top: 10px; color: var(--ion-color-dark)">
+        <b>Your order is successfully placed.</b>
+      </p>
+    </div>
+  </div>
+
+  <div class="footer_div">
+    <div class="amount_title">
+      &#8377; {{activatedRoute.snapshot.params.amount}}
+    </div>
+    <div class="p-t-20"></div>
+    <!-- <button class="pay-btn">
+      <ion-icon name="wallet"></ion-icon>&nbsp; Continue
+    </button> -->
+    <div class="p-t-10"></div>
+
+
+    <ion-row>
+      <ion-col size="12">
+        <div class="container-login100-form-btn cart_content">
+          <button (click)="goToHome()" class="login100-form-btn">
+             Home
+          </button>
+        </div>
+      </ion-col>
+      <!-- <ion-col size="6">
+        <ion-button class="blue_button" expand="block" (click)="call_now()" >
+          Call Now
+        </ion-button>
+      </ion-col> -->
+    </ion-row>
+
+  </div>
+</ion-content>

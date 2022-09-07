@@ -1,0 +1,30 @@
+
+
+* {
+	margin: 0px; 
+	padding: 0px; 
+	box-sizing: border-box;
+	
+    font-family: 'Ubuntu', sans-serif !important;
+
+}
+
+.newcard{
+	background-color: var(--ion-color-cardnewcolor);
+
+}
+.ion_toolbar{
+	color: var(--ion-color-dark);
+  }
+  p{
+	  span{
+		color:var(--ion-color-dark);
+	}
+  }
+  ion-label{
+	color:var(--ion-color-dark);
+	h2{
+		font-size:1em;
+	}
+
+  }

@@ -1,0 +1,16 @@
+*{
+    font-family: 'Ubuntu', sans-serif !important;
+}
+
+.change_color{
+    ion-item{
+        --border-color: var(--ion-color-medium) !important;
+        --background:var(--ion-color-tertiary) !important;
+     }
+    ion-icon{
+        color: var(--ion-color-dark) !important;
+    }
+     ion-label{
+        color: var(--ion-color-dark) !important;
+    }
+}

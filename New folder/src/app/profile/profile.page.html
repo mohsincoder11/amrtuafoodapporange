@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar color="toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="color:#fff; padding-left: 5%">Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="tertiary">
+  <div class="limiter" *ngIf="userData != undefined">
+    <div class="container-login100">
+      <div class="wrap-login100">
+        <form #form="ngForm" class="login100-form validate-form">
+          <span (click)="selectImage()" class="edit-form-avatar">
+            <img src="{{imgURl}}" />
+          </span>
+
+          <div class="wrap-input100 validate-input m-t-30 m-b-20" data-validate="Enter Full Name">
+            <input class="input100" type="text" name="full_name" [(ngModel)]="data.full_name"
+              placeholder="{{userData.full_name}}" />
+            <span class="focus-input100" data-placeholder="Full Name"></span>
+          </div>
+
+          <div class="wrap-input100 validate-input m-b-20" data-validate="Enter Email">
+            <input class="input100" type="Email" name="email" [(ngModel)]="data.email"
+              placeholder="{{userData.email}}" />
+            <span class="focus-input100" data-placeholder="Email"></span>
+          </div>
+
+          <!-- <div class="wrap-input100 validate-input m-b-20" data-validate="Enter Address">
+            <input class="input100" type="text" name="address" [(ngModel)]="data.address"
+              placeholder="{{userData.address != null? userData.address : 'Enter address'}}" />
+            <span class="focus-input100" data-placeholder="Address"></span>
+          </div> -->
+          
+          <!-- <div class="wrap-input100 validate-input m-b-20" data-validate="Select Area">
+            <ion-item mode="ios" lines="none">
+              <ion-select name="area_id" placeholder="Select area"  value="{{userData.area_id}}"
+              [(ngModel)]="data.area_id"
+                (ionChange)="selectArea()">
+                <ion-select-option *ngFor="let area of areas" [value]="area.id">{{area.area}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div> -->
+            <button (click)="update()" class="btn-grad">
+              Update Profile
+            </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div id="snackbar"> <span id="snackbar_error"></span></div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="tertiary">
+    <ion-row class="ion_toolbar">
+      <ion-col size="6" style="text-align: center;" routerLink="/frontpage">
+        <span class="footer-label-icon">
+          <ion-icon name="home-outline" size="small"></ion-icon>
+          </span>
+      </ion-col>
+      <ion-col size="6" style="text-align: center" >
+        <span class="footer-label-icon active">
+        <ion-icon  name="person-outline" size="small"></ion-icon>
+        <ion-label size="small">My Profile</ion-label>
+        </span>
+
+
+      </ion-col>
+     
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

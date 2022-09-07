@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="color:#fff; padding-left: 5%">Enter OTP</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="tertiary">
+  <div style="z-index: 10000; margin-top: -5%;" class="bg-white rounded-tl-3xl rounded-tr-3xl p-4">
+    <div align="center">
+      <h1 class="text-lg   text-black mt-5">Verifying Your Account</h1>
+      <p class="text-xs text-gray-600">We have just sent you 4 digit code to <br>your mobile number. </p>
+    </div>
+    <div class=" pt-2">
+      <ion-grid fixed>
+        <ion-row class="mb-5">
+          <ion-col size="3">
+            <div class="border-2 border-gray-200 shadow-md"
+              style="border-radius: 10%; border-style: outset;text-align: center;">
+              <ion-input ngModel [(ngModel)]="t1" name="a" #a (keyup)="moveFocus($event,b,'')"
+                (ionFocus)="clear_field($event)" type="number" placeholder="-">
+              </ion-input>
+            </div>
+          </ion-col>
+          <ion-col size="3">
+            <div class="border-2 border-gray-200 shadow-md"
+              style=" border-radius: 10%; border-style: outset; text-align: center;">
+              <ion-input [(ngModel)]="t2" ngModel name="b" #b (keyup)="moveFocus($event,c,a)"
+                (ionFocus)="clear_field($event)" type="number" placeholder="-">
+              </ion-input>
+            </div>
+          </ion-col>
+          <ion-col size="3">
+            <div class="border-2 border-gray-200 shadow-md"
+              style="border-radius: 10%; border-style: outset;text-align: center;">
+              <ion-input [(ngModel)]="t3" ngModel name="c" #c (keyup)="moveFocus($event,d,b)"
+                (ionFocus)="clear_field($event)" type="number" placeholder="-">
+              </ion-input>
+            </div>
+          </ion-col>
+          <ion-col size="3">
+            <div class="border-2 border-gray-200 shadow-md"
+              style="border-radius: 10%; border-style: outset;text-align: center;">
+              <ion-input [(ngModel)]="t4" ngModel name="d" #d (keyup)="moveFocus($event,'',c)"
+                (ionFocus)="clear_field($event)" type="number" placeholder="-">
+              </ion-input>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-text class="error_msg" color="danger" *ngIf="otp_error"> Enter valid OTP</ion-text>
+
+        <!-- <div align="center" class="pt-2">
+          <ion-button expand="block" class="w-full " color="danger" routerLink="/newpass">Verify OTP</ion-button>
+        </div> -->
+
+        <div class="mt-">
+          <button class="btn-grad" (click)="verify()">
+            Verify OTP
+          </button>
+        </div>
+
+      </ion-grid>
+    </div>
+  </div>
+
+
+
+  <div style="margin-top:10px;float:right;margin-right: 7%;">
+    <p class="text-xs text-gray-600 p-1" (click)="resend_otp()" *ngIf="time==0">Didn't receive code ? <span
+        class="primary-color">Resend</span> </p>
+    <p class="text-xs text-gray-600 p-1" *ngIf="time>0"> Didn't receive code? Resend <span
+        style="color: var(--ion-color-primary);"> 00:{{time}}</span> </p>
+  </div>
+  <div *ngIf="loader_visibility" class="lds-ripple">
+    <div></div>
+    <div></div>
+  </div>
+
+  <div id="snackbar"> <span id="snackbar_error"></span></div>
+
+</ion-content>

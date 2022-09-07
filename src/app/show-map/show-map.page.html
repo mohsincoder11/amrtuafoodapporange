@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <!-- <ion-buttons slot="start">
+      <ion-icon name="arrow-back-outline" style="color: #ffffff; height: 30px; width: 30px;"></ion-icon>
+    </ion-buttons> -->
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="color:#fff">Choose delivery location</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="tertiary">
+  <div #mapElement class="map"></div>
+
+  <div class="address_main_div">
+    <ion-row>
+      <ion-label>{{this.user_address}}</ion-label>
+
+    </ion-row>
+    <ion-row>
+      <button class="btn-grad" [disabled]="btn_disabled" (click)="confirm_address()">Confirm Address</button>
+    </ion-row>
+  </div>
+
+</ion-content>

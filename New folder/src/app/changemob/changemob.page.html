@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="color:#fff; padding-left: 5%;">Set Password</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content color="tertiary">
+  <div style="margin-top: 10%">
+    <p class="forgot_label"
+    align="center"
+        >
+    <strong>Set new password.</strong> <br />
+  </p>
+  </div>
+
+  <div style="z-index: 10000; margin-top: -5%;" class="bg-white rounded-tl-3xl rounded-tr-3xl p-4">
+    <form #form="ngForm" style="padding:0 1rem;">
+      <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input name="pass"
+      [(ngModel)]="pass"
+      type="password"
+      minlength="6"
+      required></ion-input>
+    </ion-item>
+    <ion-item class="mt-2">
+      <ion-label position="floating">New Password</ion-label>
+      <ion-input  ngModel
+      name="confirmPass"
+      (keyup)="confirmPassword($event.target.value)"
+      type="password"
+      minlength="6"
+      required></ion-input>
+    </ion-item>
+    <!-- <div align="center" class="pt-2">
+            <ion-button expand="block" class="w-full " color="danger" routerLink="/dashboard">Submit</ion-button>
+        </div> -->
+
+    <div class="mt-2" style="margin-top:2rem">
+      <button class="btn-grad" [disabled]="!btnView"
+      (click)="changePassword()">
+        Submit
+      </button>
+
+    </div>
+    </form>
+  </div>
+  <div id="snackbar"> <span id="snackbar_error"></span></div>
+
+</ion-content>

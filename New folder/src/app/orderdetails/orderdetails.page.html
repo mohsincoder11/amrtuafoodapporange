@@ -1,0 +1,174 @@
+<ion-header>
+  <ion-toolbar color="toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="color:#fff; padding-left: 5%">Order Details</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="tertiary" class="content_new">
+  <ion-card style="padding-bottom: 10%;" color="tertiary">
+    <ion-label>
+      <h1 style="padding: 3%;">Order Summary</h1>
+    </ion-label>
+
+    <ion-item *ngFor="let item of orderDetails">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">{{item.itemname}}</ion-col>
+          <ion-col size="6" style="margin-top: 1%"><b>{{item.weight}} kg.</b></ion-col>
+          <ion-col size="6" style="text-align: right">&#8377;{{item.rate}}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <!-- <ion-item>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="12">Fresh Chicken</ion-col>
+          <ion-col size="6" style="margin-top: 1%;"><b>2 kg.</b></ion-col>
+          <ion-col size="6" style="text-align: right;">&#8377;130</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item> -->
+
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">Total</ion-col>
+          <ion-col size="6" style="text-align: right">&#8377;{{totalAmount}}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">Delivery Charges</ion-col>
+          <ion-col size="6" style="text-align: right"> <span *ngIf="totalAmount!=evDes.amount">+  &#8377;{{evDes.delivery_charge}}</span> <span
+              *ngIf="totalAmount==evDes.amount">Free</span></ion-col>
+        </ion-row>
+        <ion-row *ngIf="((totalAmount+evDes.delivery_charge)-evDes.amount)>0">
+          <ion-col size="6">Wallet Amount Used</ion-col>
+          <ion-col size="6" style="text-align: right"> <span>- &#8377; {{(totalAmount+evDes.delivery_charge)-evDes.amount}} </span> </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6"><b>Grand Total</b></ion-col>
+          <ion-col size="6" style="text-align: right"><b>&#8377;{{evDes.amount}}</b></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-label>
+      <h2 style="padding: 3%; color: dark">
+        <h2><b>Order Details</b></h2>
+      </h2>
+    </ion-label>
+
+    <div *ngIf="evDes != undefined">
+      <ion-item>
+        <ion-label><b style="font-size: medium">Order Number : &nbsp; </b>
+          <span>{{evDes.orderno}}</span></ion-label>
+      </ion-item>
+      <ion-item *ngIf="credit>0">
+        <ion-label><b style="font-size: medium">Wallet credit earned: &nbsp; </b>
+          <span>&#8377;{{credit}}</span></ion-label>
+      </ion-item>
+      <ion-item *ngIf="evDes.status == '2'">
+        <div>
+          <p>
+            Payment <br />
+            <span> Paid </span>
+          </p>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label><b style="font-size: medium">Date : &nbsp; </b>
+          <span>{{evDes.created_at}}</span></ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label><b style="font-size: medium">Mobile number : &nbsp; </b>
+          <span>{{evDes.mobile}}</span></ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label><b style="font-size: medium">Delivery address : &nbsp; </b>
+          <span>{{evDes.address
+            }}</span></ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label><b style="font-size: medium">MOP : &nbsp; </b>
+          <span>
+            {{evDes.mop }} {{evDes.mop == 'online' ? "Paid":""}}
+          </span></ion-label>
+        <ion-button (click)="payOnline()" *ngIf="evDes.mop == 'cod' && evDes.status != '-1' && evDes.status!=3" color="success"
+          shape="round">
+          Pay online
+        </ion-button>
+      </ion-item>
+
+      <ion-item *ngIf="evDes.delivery_mobile != null">
+        <ion-label><b style="font-size: medium">Delivery master number: &nbsp; </b>
+          <span>{{evDes.delivery_mobile}}</span></ion-label>
+      </ion-item>
+
+      <ion-item *ngIf="evDes.delivery_mobile != null && evDes.status!=3" (click)="track_order()">
+        <ion-label><b style="font-size: medium">Track order &nbsp; <ion-icon name="locate"></ion-icon> </b> </ion-label>
+          
+      </ion-item>
+      <ion-item>
+        <ion-label *ngIf="evDes.status==3"><b style="font-size: medium">Order status:</b>&nbsp;Delivered </ion-label>
+        <ion-label  *ngIf="evDes.status==1 || evDes.status==2"><b style="font-size: medium">Order status:</b>&nbsp;Out for delivery </ion-label>
+        <ion-label color="danger"  *ngIf="evDes.status==-1"><b style="font-size: medium">Order status:</b>&nbsp;Order Canceled </ion-label>
+        <ion-label *ngIf="evDes.status ==0"><b style="font-size: medium">Order status:</b>&nbsp;Order Placed </ion-label>
+
+      </ion-item>
+
+      <!-- <ion-item>
+        <ion-row>
+          <ion-col size="12">Order Number</ion-col>
+          <ion-col size="12"><b>{{evDes.orderno}}</b></ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item *ngIf="evDes.status == '2'">
+        <div>
+          <p>
+            Payment <br />
+            <span> Paid </span>
+          </p>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col size="12">Date</ion-col>
+          <ion-col size="12"><b>{{evDes.created_at}}</b></ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col size="12">Phone Number</ion-col>
+          <ion-col size="12"><b>{{evDes.mobile}}</b></ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col size="12">Deliver to</ion-col>
+          <ion-col size="12"><b>{{evDes.address}}</b></ion-col>
+        </ion-row>
+      </ion-item> -->
+    </div>
+  </ion-card>
+  <div class="container-login100-form-btn cart_content">
+    <button class="login100-form-btn" (click)="repeat_order()">
+      Repeat Order
+    </button>
+  </div>
+</ion-content>

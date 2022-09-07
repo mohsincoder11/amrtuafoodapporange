@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon
+      class="ion-padding"
+      size="large"
+      slot="end"
+      (click)="dismiss(mop)"
+      name="close"
+    ></ion-icon>
+    <ion-label class="ion-padding" slot="start">
+      <strong>Choose payment mode</strong>
+    </ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div >
+    <ion-list>
+      <ion-radio-group
+        name="auto"
+        mode="md"
+        (ionChange)="selectPayMode($event)"
+      >
+        <ion-item>
+          <ion-label>Cash on delivery</ion-label>
+          <ion-radio value="cod"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Pay via upi</ion-label>
+          <ion-radio value="online"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+  </div>
+</ion-content>

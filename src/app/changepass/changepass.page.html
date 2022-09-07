@@ -1,0 +1,106 @@
+<!-- <ion-header>
+  <ion-toolbar color="toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="color:#fff; padding-left: 5%;">Set Password</ion-title>
+
+  </ion-toolbar>
+</ion-header> -->
+<ion-content color="tertiary">
+  <!-- <div style="margin-top: 10%">
+    <p class="forgot_label"
+    align="center"
+        >
+    <strong>Set new password.</strong> <br />
+  </p>
+  </div> -->
+  <div class="img_conn" style="background-image: url('../../../assets/bg_img1.png')"></div>
+
+  <div align="center" style="margin-top: -4rem;">
+    <img class="login-img" src="assets/images/logo.png" />
+  </div>
+
+  <div style="z-index: 10000; margin-top: -5%;" class="bg-white rounded-tl-3xl rounded-tr-3xl p-4">
+    <form #form="ngForm">
+      <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input name="pass"
+      [(ngModel)]="pass"
+      type="password"
+      minlength="6"
+      required></ion-input>
+    </ion-item>
+    <ion-item class="mt-2">
+      <ion-label position="floating">New Password</ion-label>
+      <ion-input  ngModel
+      name="confirmPass"
+      (keyup)="confirmPassword($event.target.value)"
+      type="password"
+      minlength="6"
+      required></ion-input>
+    </ion-item>
+    <!-- <div align="center" class="pt-2">
+            <ion-button expand="block" class="w-full " color="danger" routerLink="/dashboard">Submit</ion-button>
+        </div> -->
+
+    <div class="mt-2">
+      <button class="btn-grad" [disabled]="!btnView"
+      (click)="changePassword()">
+        Submit
+      </button>
+
+    </div>
+    </form>
+  </div>
+
+  <!-- <div style="margin-top: 10%; padding-left: 5%; padding-right: 5%">
+    <form #form="ngForm">
+     
+
+      <div
+        class="wrap-input100 validate-input m-b-25"
+        data-validate="Enter password"
+      >
+        <input
+          class="input100"
+          name="pass"
+          [(ngModel)]="pass"
+          type="password"
+          minlength="6"
+          required
+        />
+        <span class="focus-input100" data-placeholder="Password"></span>
+      </div>
+
+      <div
+        class="wrap-input100 validate-input m-b-25"
+        data-validate="Confirm password"
+      >
+        <input
+          class="input100"
+          ngModel
+          name="confirmPass"
+          (keyup)="confirmPassword($event.target.value)"
+          type="password"
+          minlength="6"
+          required
+        />
+        <span class="focus-input100" data-placeholder="Confirm password"></span>
+      </div>
+
+      <div class="container-login100-form-btn">
+        <button
+          [disabled]="!btnView"
+          (click)="changePassword()"
+          class="login100-form-btn"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div> -->
+  
+  <div id="snackbar"> <span id="snackbar_error"></span></div>
+
+</ion-content>

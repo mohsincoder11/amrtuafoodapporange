@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="toolbar">
+    <!-- <ion-buttons slot="start">
+      <ion-icon name="arrow-back-outline" style="color: #ffffff; height: 30px; width: 30px;"></ion-icon>
+    </ion-buttons> -->
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="color:#fff; padding-left: 5%">Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="tertiary" class="change_color">
+  <ion-item (click)="cart()">
+    <ion-icon name="cart-outline" class="ion-margin"></ion-icon>
+    <ion-label class="ion-margin">Cart</ion-label>
+  </ion-item>
+  <ion-item (click)="editProfile()">
+    <ion-icon name="person-outline" class="ion-margin"></ion-icon>
+    <ion-label class="ion-margin">Edit profile</ion-label>
+  </ion-item>
+  <ion-item (click)="about()">
+    <ion-icon name="information-circle-outline" class="ion-margin"></ion-icon>
+    <ion-label class="ion-margin">About Us</ion-label>
+  </ion-item>
+  <ion-item (click)="changeMob()">
+    <ion-icon name="lock-open-outline" class="ion-margin"></ion-icon>
+    <ion-label class="ion-margin">Change Password</ion-label>
+  </ion-item>
+  <ion-item (click)="orderHistory()">
+    <ion-icon name="receipt-outline" class="ion-margin"></ion-icon>
+    <ion-label class="ion-margin">Order History</ion-label>
+  </ion-item>
+  <ion-item (click)="logOut()">
+    <ion-icon name="log-out-outline" class="ion-margin"> </ion-icon>
+    <ion-label class="ion-margin">Logout</ion-label>
+  </ion-item>
+</ion-content>

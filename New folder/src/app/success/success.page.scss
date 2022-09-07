@@ -1,0 +1,101 @@
+.login100-form-btn {
+    font-size: 18px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    width: 100%;
+    height: 50px;
+    background-image: linear-gradient(to right, #00a1fb, #00a1fb, #00a1fb, #00a1fb, #00a1fb);
+    border-radius: 5px;
+
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.container-login100-form-btn {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 3%;
+}
+
+.amount_title {
+    text-align: center;
+    color: var(--ion-color-dark);
+    padding: 2vh 0;
+}
+
+.checkmark {
+    width: 12vh;
+    height: 12vh;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: var(--ion-color-success);
+    stroke-miterlimit: 10;
+    box-shadow: inset 0px 0px 0px var(--ion-color-success);
+    animation: fill 1.8s ease-in-out 1.8s forwards, scale 1.8s ease-in-out 1.8s both;
+    position: relative;
+    top: 5px;
+    right: 5px;
+    margin: 0 auto;
+}
+
+.checkmark__circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: var(--ion-color-success);
+    fill: var(--ion-color-tertiary);
+    animation: stroke 1.8s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark__check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke 1.0s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards;
+}
+
+@keyframes stroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes scale {
+
+    0%,
+    100% {
+        transform: none;
+    }
+
+    50% {
+        transform: scale3d(1.1, 1.1, 1);
+    }
+}
+
+@keyframes fill {
+    100% {
+        box-shadow: inset 0px 0px 0px 30px var(--ion-color-tertiary);
+    }
+}

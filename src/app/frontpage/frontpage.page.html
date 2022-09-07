@@ -1,0 +1,201 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+
+    <ion-buttons slot="primary" (click)="cart()">
+      <ion-badge *ngIf="productCount != 0" style="
+          position: absolute;
+          right: -2px;
+          z-index: 1;
+          top: -8px;
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          font-size: 12px;
+          font-weight: bold;
+          border:3px solid #ff970d;
+        " color="cardnewcolor" mode="ios">
+        <span style="font-size: smaller;color:#FF7B00;"> {{productCount }} </span>
+      </ion-badge>
+      <ion-button>
+        <ion-icon name="cart-outline" style="font-size: 1.6rem;"></ion-icon>
+
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title class="header_title">Amruta's Chicken</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="tertiary">
+
+  <div class="pl-2 pr-2 pt-2">
+    <ion-slides class="slider" [options]="slideOptions11" pager="true" #slider
+      (ionSlidesDidLoad11)="slidesDidLoad11(slider)">
+      <ion-slide>
+        <img class="img1  rounded-md" src="assets/images/img5.jpg" />
+      </ion-slide>
+      <ion-slide>
+        <img class="img1" src="assets/images/img1.jpg" />
+      </ion-slide>
+      <ion-slide>
+        <img class="img1" src="assets/images/img3.jpg" />
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf="product.length == 0">
+    <div align="center">
+      <ion-spinner *ngIf="spinnerStatus" name="crescent"></ion-spinner>
+    </div>
+    <p align="center" style="color: black">Loading...</p>
+  </div>
+
+
+
+  <!-- <ion-slides *ngIf="didInit" #slides [options]="sliderOptions" class="main_slider">
+    <ion-slide class="slide_s" *ngFor="let item of promotion_offer;let j=index;" (click)="addToCart('from_offer',j)">
+      <ion-row>
+        <img src="{{ds.offersImage}}/{{item.image}}" alt="">
+
+      </ion-row>
+    </ion-slide>
+  </ion-slides> -->
+
+
+  <!-- <div class="itemsdiv">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3">
+          <img  src="assets/images/1.jpg" />
+        </ion-col>
+        <ion-col size="9">
+            <p>
+              CHICKEN CURRY PIECE ( SMALL)<br>
+              <span style="color: rgb(170, 170, 170);">₹ 160 / Kg</span>
+            </p>
+            <ion-row>
+              <ion-col size="4">
+                <p> 1 kg</p>
+              </ion-col>
+              <ion-col size="4">
+                <ion-input style="
+                    border-bottom: 1px solid;
+                    width: 80%;
+                    height: 50%;
+                    margin-left: 10%;
+                    padding-left: 5%;" type="number">
+                </ion-input>
+              </ion-col>
+              <ion-col size="4">
+                <p>
+                  <ion-button color="primary" size="small"> Add <ion-icon name="add-outline"></ion-icon></ion-button>
+                </p>
+              </ion-col>
+            </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div> -->
+
+
+  <ion-row>
+    <ion-col *ngFor="let item of product; let i = index" size="12" style="padding:0 !important">
+      <ion-card class="product_cart">
+        <ion-row   >
+          <ion-col size="3">
+            <img class="imgcard" *ngIf="item.image != ''" src="{{ds.serverImage}}/{{item.image}}" />
+            <img class="imgcard" *ngIf="item.image == ''" src="assets/chicken.jpg" class="ion-padding" />
+          </ion-col>
+
+          <ion-col size="9" class="padding_10" >
+            <ion-label>
+              <p>
+                {{item.itemname}}
+              </p>
+            </ion-label>
+
+            <ion-row>
+              <ion-col>
+
+              </ion-col>
+            </ion-row>
+
+            <ion-label class="rate_label">
+              <b>&#8377; {{item.retailrate}} / kg </b>
+            </ion-label>
+            <div *ngIf="item.stock != 1">
+              <p align="center" style="color: rgb(214, 49, 49)">
+                <b>Out of stock</b>
+              </p>
+            </div>
+
+            <ion-row *ngIf="item.stock == 1" style="margin-top:1rem;">
+              <ion-col size="4">
+                <ion-input style="
+                    border-bottom: 1px solid;
+                    width: 80%;
+                    height: 50%;
+                    margin-left: 10%;
+                    padding-left: 5%;
+                  " [(ngModel)]="item.weight" (ionChange)="updateAmount($event, i, item.id)" type="number"
+                  value="{{item.weight}}">
+                </ion-input>
+              </ion-col>
+
+              <ion-col size="1">
+                <ion-label position="floating">kg.</ion-label>
+              </ion-col>
+              <ion-col size="3">
+                &nbsp; &#8377; <b><span class="change_rate" id="change_rate{{item.id}}"> {{item.retailrate}}</span></b>
+              </ion-col>
+
+              <ion-col size="4" style=" margin-bottom: 0%">
+                <!-- <button color="primary" (click)="addToCart('from_regular',i)" class="add_btn">
+                  <ion-icon name="add-outline"></ion-icon>
+                </button> -->
+                <ion-button (click)="addToCart('from_regular',i)" color="primary" size="small"> Add <ion-icon name="add-outline"></ion-icon></ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <div id="snackbar"> <span id="snackbar_error"></span></div>
+  <div *ngIf="loader_visible" class="lds-ripple">
+    <div></div>
+    <div></div>
+  </div>
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar color="tertiary">
+    <ion-row class="ion_toolbar">
+      <ion-col size="6" style="text-align: center;">
+        <span class="footer-label-icon active">
+          <ion-icon name="home-outline" size="small"></ion-icon>
+          <ion-label size="small">Home</ion-label>
+        </span>
+      </ion-col>
+      <ion-col size="6" style="text-align: center">
+        <span class="footer-label-icon">
+
+        <ion-icon (click)="goToProfile()" name="person-outline" size="small"></ion-icon>
+        </span>
+      </ion-col>
+      <!-- <ion-col size="4" style="text-align: center">
+        <ion-icon (click)="settings()" size="large" name="settings-outline"></ion-icon>
+      </ion-col> -->
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

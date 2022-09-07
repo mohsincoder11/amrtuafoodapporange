@@ -1,0 +1,46 @@
+<!-- <ion-header>
+  <ion-toolbar color="toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="color:#fff; padding-left: 5%;">Forgot Password</ion-title>
+
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content color="tertiary">
+  <div class="img_conn" style="background-image: url('../../../assets/bg_img1.png')"></div>
+
+  <div align="center" style="margin-top: -4rem;">
+    <img class="login-img" src="assets/images/logo.png" />
+  </div>
+
+  <div style="z-index: 10000; margin-top: -10%;" class="bg-white rounded-tl-3xl rounded-tr-3xl p-4">
+    <form #form="ngForm">
+      <ion-item>
+      <ion-label position="floating">Mobile Number</ion-label>
+      <ion-input [(ngModel)]="mobileNo" name="mobile_no" (keyup)="checkMob($event.target.value)" type="number"
+      required></ion-input>
+     
+    </ion-item>
+ <ion-text class="error_msg" color="danger" *ngIf="mobile_no"> Enter valid 10 digits number.</ion-text>
+      <ion-text class="error_msg" color="danger" *ngIf="mobile_no_not_register"> This mobile number is not registered with us.</ion-text>
+
+    <div class="mt-2">
+      <button [disabled]="!btnView" (click)="otpPage(form)" class="btn-grad">
+        Continue
+      </button>
+    </div>
+    </form>
+  </div>
+
+
+ 
+  <div id="snackbar"> <span id="snackbar_error"></span></div>
+
+  <div *ngIf="loader_visible" class="lds-ripple">
+    <div></div>
+    <div></div>
+  </div>
+  
+</ion-content>

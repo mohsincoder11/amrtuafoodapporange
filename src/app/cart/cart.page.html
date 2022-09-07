@@ -1,0 +1,242 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <!-- <ion-buttons slot="start">
+      <ion-icon name="arrow-back-outline" style="color: #ffffff; height: 30px; width: 30px;"></ion-icon>
+    </ion-buttons> -->
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="color:#fff">Cart</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="tertiary">
+  <ion-card *ngFor="let item of cartItems; let i = index" class="cardnew">
+    <ion-grid class="ion-no-margin" class="ion-no-padding">
+      <ion-row class="ion-no-margin" class="ion-no-padding">
+        <ion-col size="3">
+          <div class="item_img">
+            <img *ngIf="item.image != ''" src="{{ds.serverImage}}/{{item.image}}" class="ion-padding" />
+          </div>
+        </ion-col>
+        <ion-col size="9" class="text-area">
+          <div class="mt-3.5">
+            <ion-label>
+              <h3 style="margin-top:1rem;color:var(--ion-color-dark) !important;"><b>{{item.itemname}}</b></h3>
+            </ion-label>
+            <ion-label>
+              <h3 style="margin-top:0.5rem;"><b>&#8377; {{item.originalAmount}}</b></h3>
+            </ion-label>
+            <ion-row style="padding-top: 3%">
+              <!-- <ion-col size="4">
+                <ion-input [(ngModel)]="item.newW" (ionChange)="updateAmount($event.target.value , i, item.id)"
+                  style="border-bottom: 1px solid; width: 80%; height: 40%" type="number" placeholder="{{item.weight}}">
+                </ion-input>
+              </ion-col> -->
+              <ion-col size="3">
+                <ion-label position="floating">{{item.weight}} KG</ion-label>
+              </ion-col>
+              <ion-col size="3">
+                &nbsp; &#8377; <b><span class="change_rate" id="change_rate{{item.id}}"> {{item.rate}}</span></b>
+
+              </ion-col>
+              <ion-col size="4">
+                <ion-label position="floating" color="danger" (click)="remove(i)">Remove</ion-label>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <div style="margin-top: 50%" *ngIf="cartItems.length == 0">
+
+    <p align="center" *ngIf="cartItems.length == 0 && loader_visible==false;
+    ">
+      <b style="font-size: 1.5em; color: var(--ion-color-dark)"> Your cart is empty. </b>
+      <br />
+      <span style="font-size: 1em; color: var(--ion-color-dark)">
+        Add something from the menu
+      </span>
+      <br />
+      <ion-button style="color: var(--ion-color-dark)" (click)="goToHome()" fill="clear">
+        Browse
+      </ion-button>
+    </p>
+  </div>
+
+  <div *ngIf="cartItems.length != 0">
+    <p class="ion-padding" style="color: var(--ion-color-dark);margin-bottom: 0.5rem;" class="h-4 mx-4">
+      <b> Delivery Details </b>
+    </p>
+
+    <!-- <ion-item class="rounded-lg mx-3.5 mt-4 mb-2 h-12 ">
+      <ion-icon style="font-size: 17px; color: rgb(155, 155, 155)" name="location-sharp"></ion-icon>
+      &nbsp;
+      <ion-input class="ml-2" mode="ios" type="text" [(ngModel)]="address"
+        placeholder="{{address != null ? address : 'Enter your address' }}"></ion-input>
+    </ion-item> -->
+
+    <ion-item class="rounded-lg mx-3.5 mb-2 h-12 ">
+      <ion-icon style="font-size: 17px; color: rgb(155, 155, 155)" name="call"></ion-icon>
+      &nbsp;
+      <ion-input class="ml-2" mode="ios" type="number" class="input100" [(ngModel)]="cust_mob"
+        placeholder="{{cust_mob != null ? cust_mob : 'Enter mobile number' }}"></ion-input>
+    </ion-item>
+
+    <div style="padding: 0 ">
+
+      <ion-item class="border-2 border-gray-500 border-opacity-25 rounded-lg mx-3.5 mb-2.5 h-12" mode="ios"
+        lines="none">
+        <ion-select *ngIf="openStatus" class="ion-no-margin" placeholder=" Select delivery time:"
+          [(ngModel)]="selectTime" (ionChange)="selectTimeSlot()" value="{{dayName}}" style="font-size: 0.9rem;">
+          <ion-select-option *ngFor="let area of timeSlot;let idx = index">{{area.time}}</ion-select-option>
+        </ion-select>
+
+        <!-- <img src="assets/close.png" width=""  height="" alt=""> -->
+
+        <div *ngIf="!openStatus">
+          <ion-text (click)="alertPresent()"> Select delivery time: </ion-text>
+        </div>
+
+      </ion-item>
+    </div>
+
+    <!-- <ion-item class="border-2 border-gray-500 border-opacity-25 rounded-lg mx-3.5 mb-2.5 h-12" mode="ios" lines="none">
+      <ion-select placeholder="Select Area:" [(ngModel)]="area_id" (ionChange)="selectArea()">
+        <ion-select-option *ngFor="let area of product" [value]="area.id">{{area.area}}</ion-select-option>
+      </ion-select>
+    </ion-item> -->
+    <ion-text class="error_msg" color="danger" *ngIf="time_select"> Select all required field. </ion-text>
+
+    <!-- <ion-item>
+      <div>
+        <ion-label>Enter mobile number</ion-label><br />
+        <ion-input
+          type="number"
+          class="input100"
+          maxlength="10"
+          [(ngModel)]="cust_mob"
+          placeholder="{{cust_mob}}"
+        ></ion-input>
+      </div>
+    </ion-item> -->
+  </div>
+
+  <div *ngIf="cartItems.length != 0" class="margin_bottom">
+
+    <div lines="none" class="ion-padding">
+      <b style="color: var(--ion-color-dark)"> Order Specification </b>
+      <br />
+      <!-- Default textarea -->
+      <ion-textarea style="margin-bottom:0.5rem;" placeholder=" Select delivery time:" [(ngModel)]="details"></ion-textarea>
+
+      <b style="color: var(--ion-color-dark)"> Address </b>
+      <br />
+      <p style="width: 70%;color: rgb(146, 146, 146); font-size:small;line-height:28px; white-space: nowrap;
+      overflow: hidden;text-overflow: ellipsis;" (click)="show_map()">
+        {{this.address}} <span style="position: absolute; right: 15px;color: var(--ion-color-danger)"> Choose address
+        </span></p>
+
+      <b style="color: var(--ion-color-dark);"> Offers </b>
+      <br />
+      <ion-label *ngIf="!selected_coupon" style="color: rgb(146, 146, 146); font-size: small;line-height:25px;"
+        (click)="show_offers()">Select coupon code<span
+          style="position: absolute; right: 15px;color: var(--ion-color-danger)"> View offers
+        </span></ion-label>
+
+      <ion-label *ngIf="selected_coupon"
+        style="color: rgb(146, 146, 146); font-size: small;font-weight: bold;line-height:25px;">
+        {{selected_coupon.coupon_code}}<span style="position: absolute; right: 15px;color: var(--ion-color-danger)"
+          (click)="remove_coupon()"> Remove
+        </span>
+        <br>
+        <span style="color: var(--ion-color-dark);font-weight: 100;">wallet cashback of &#8377; {{credit}} will be
+          credited to your wallet.</span> </ion-label>
+
+      <br />
+      <b style="color: var(--ion-color-dark)"> Wallet </b>
+      <br />
+      <ion-label style="color: rgb(146, 146, 146); font-size: small;line-height:25px;">Use
+        <b>{{usable_wallet_amount}}</b> of <b>
+          {{wallet_amount}}</b> wallet amount <span
+          style="position: absolute; right: 15px;color: var(--ion-color-danger)">
+          <ion-toggle color="primary" [ngModel]="wallet_boolean_Val" [disabled]="wallet_amount<1"
+            (ionChange)="use_wallet_amount($event.target.value)"></ion-toggle>
+        </span></ion-label>
+      <br />
+      <b style="color: var(--ion-color-dark)"> Order Summery </b><br />
+      <ion-label style="color: rgb(146, 146, 146); font-size: small">Total Amount<span
+          style="position: absolute; right: 15px">&#8377; {{finalAmount}}
+        </span></ion-label>
+      <br />
+      <ion-label style="color: rgb(146, 146, 146); font-size: small" *ngIf="usable_wallet_amount>0">Wallet Amount
+        <span style="position: absolute; right: 15px">- &#8377; {{usable_wallet_amount}} </span>
+      </ion-label>
+      <br *ngIf="usable_wallet_amount>0" />
+      <ion-label style="color: rgb(146, 146, 146); font-size: small">Delivery Charges
+        <span style="position: absolute; right: 15px">+ &#8377; {{delivery_charge}} </span>
+      </ion-label>
+      <br />
+
+      <ion-label style="color: rgb(146, 146, 146); font-size: 1rem;font-weight: bold;color: #000;">
+        Grand total
+        <span style="position: absolute; right: 15px; font-size: 1rem;font-weight: bold;color: #000;">&#8377;
+          {{final_and_delivery}}
+        </span>
+      </ion-label>
+    </div>
+
+    <!-- <ion-item lines="none">
+      <ion-label
+      
+        style="color: rgb(146, 146, 146); font-size: small"
+        >Delivery Charges
+        <span style="position: absolute; right: 15px">&#8377; 0 </span>
+      </ion-label>
+    </ion-item> -->
+
+    <!-- <ion-item lines="none">
+      <ion-label>
+        Grand total
+        <span style="position: absolute; right: 15px; font-size: small"
+          >&#8377; {{finalAmount + 0}}
+        </span>
+      </ion-label>
+    </ion-item> -->
+
+    <div class="container-login100-form-btn cart_content">
+      <button class="btn-grad" (click)="selectPaymentMod()">
+        <span style="float:left;font-weight: bold;font-size: 0.9rem;">Place order</span>
+        <span style="float:right;font-size: 0.9rem;">&#8377;{{final_and_delivery}}</span>
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="loader_visible" class="lds-ripple">
+    <div></div>
+    <div></div>
+  </div>
+</ion-content>
+
+<!-- <ion-footer>
+  <ion-toolbar color="tertiary">
+    <ion-row class="ion_toolbar">
+      <ion-col size="6" style="text-align: center;">
+        <span class="footer-label-icon " routerLink="/frontpage">
+          <ion-icon name="home-outline" size="small"></ion-icon>
+        </span>
+      </ion-col>
+      <ion-col size="6" style="text-align: center">
+        <span class="footer-label-icon" routerLink="/profile">
+
+          <ion-icon name="person-outline" size="small"></ion-icon>
+        </span>
+      </ion-col>
+      <ion-col size="4" style="text-align: center">
+        <ion-icon (click)="settings()" size="large" name="settings-outline"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer> -->
